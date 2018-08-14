@@ -1,30 +1,29 @@
-
-var noRecFactorial = function(a) {
-  var result = 1;
-  for(var i=1;i<=a;i++) {
-    result *= i;
+var isPalidrome = function(txt) {
+  var txtArray = txt.split("");
+  var halfCount = (txtArray.length) / 2;
+  var firstHalf = txtArray.slice(0,halfCount);
+  if (txtArray.length % 2 === 0) { //even
+    var lastHalf = txtArray.slice(halfCount);
+  } else { //odd
+    var lastHalf = txtArray.slice(halfCount + 1);
   }
-  return result;
+  var lastHalf = lastHalf.reverse();
+  if (firstHalf.toString() === lastHalf.toString()) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
-var withRecFactorial = function(b) {
-  var result = 1;
-  for(;b!==0;b--) {
-    result *= b;
-  }
-  return result;
-};
 
 $(document).ready(function() {
 
-  $("#factorial-method").submit(function(event) {
+  $("#palidrome-method").submit(function(event) {
 
-    var toOutput = noRecFactorial($("#numInput").val());
-    var otherOutput = withRecFactorial($("#numInput").val());
-    $('#output').text(toOutput);
-    $('#output').append("<br>" + otherOutput);
-    $("#result").show();
-
+    var phrase = $("input#txtInput").val();
+    var phrase = phrase.toLowerCase();
+    var output = isPalidrome(phrase);
+    alert(output);
     event.preventDefault();
   });
 });
